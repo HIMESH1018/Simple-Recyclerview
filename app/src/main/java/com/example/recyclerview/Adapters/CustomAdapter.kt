@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerview.Models.CustomModel
@@ -12,7 +13,7 @@ import com.example.recyclerview.R
 
 class CustomAdapter(private val dataSet: List<CustomModel>):RecyclerView.Adapter<CustomAdapter.CustomViewHolder>() {
 
-
+    private var mlistner: onItemClickListener? = null
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -23,7 +24,7 @@ class CustomAdapter(private val dataSet: List<CustomModel>):RecyclerView.Adapter
             Log.d("TAG", "onCreateViewHolder: not null")
         }
 
-        return CustomViewHolder(v)
+        return CustomViewHolder(v, mlistner!!)
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
@@ -46,13 +47,14 @@ class CustomAdapter(private val dataSet: List<CustomModel>):RecyclerView.Adapter
     }
 
 
-    class CustomViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
+    class CustomViewHolder(itemView:View,listener:onItemClickListener):RecyclerView.ViewHolder(itemView){
         val vehicle_name: TextView
         val driver_name:TextView
         val s_lcoation:TextView
         val end_lcoation:TextView
         var price:TextView
         val distance:TextView
+        val cardView:CardView
         init {
 
             vehicle_name = itemView.findViewById(R.id.vehicle_name)
@@ -61,6 +63,24 @@ class CustomAdapter(private val dataSet: List<CustomModel>):RecyclerView.Adapter
             end_lcoation = itemView.findViewById(R.id.end_lcoation)
             price = itemView.findViewById(R.id.price)
             distance = itemView.findViewById(R.id.distance)
+            cardView = itemView.findViewById(R.id.cardView)
+
+            cardView.setOnClickListener(View.OnClickListener {
+                if (listener != null) {
+                    val position = adapterPosition
+                    if (position != RecyclerView.NO_POSITION) {
+                        listener.onItemClick(position)
+                    }
+                }
+            })
         }
+    }
+
+    interface onItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
+    fun setOnItemClickListner(listner: onItemClickListener) {
+        mlistner = listner
     }
 }

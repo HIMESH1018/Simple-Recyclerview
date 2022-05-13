@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Project/Tutorials/Kotlin/Recyclerview/app/src/main/res/layout/activity_detail.xml" value="0.25" />
         <entry key="..\:/Android Project/Tutorials/Kotlin/Recyclerview/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Android Project/Tutorials/Kotlin/Recyclerview/app/src/main/res/layout/custom_trip_recycler.xml" value="0.25" />
       </map>
